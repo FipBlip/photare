@@ -1,25 +1,29 @@
 {
-	"name": "photare",
-	"main": "server.js",
-	"dependencies": {
-		"express": "~4.5.1",
-		"mongoose": "~3.8.0",
-		"body-parser": "~1.4.2",
-		"method-override": "~2.0.2"
-	},
-	"description": "Simple photo sharing service",
-	"version": "0.0.1",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/FipBlip/photare.git"
-	},
-	"author": "Rahul Vagadiya",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/FipBlip/photare/issues"
-	},
-	"homepage": "https://github.com/FipBlip/photare"
+  "name": "photare",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "~1.4.2",
+    "express": "~4.5.1",
+    "mongoose": "~3.8.0"
+  },
+  "description": "Simple photo sharing service",
+  "version": "0.0.1",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FipBlip/photare.git"
+  },
+  "author": "Rahul Vagadiya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FipBlip/photare/issues"
+  },
+  "homepage": "https://github.com/FipBlip/photare",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.11.0",
+    "grunt-contrib-watch": "^0.6.1"
+  }
 }
