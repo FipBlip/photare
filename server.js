@@ -5,9 +5,12 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 
-/**
- * Mongo DB Connection
- */
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
+var port = process.env.PORT || 8080;
+
+// Mongo DB Connection
 var mongoose   = require('mongoose');
 mongoose.connect('mongodb://localhost/photare'); // connect to our database
 mongoose.connection.on("open", function(){
@@ -15,22 +18,22 @@ mongoose.connection.on("open", function(){
 });
 
 /**
- * Router
+ * Routes
  */
 var router = express.Router();
-var port = process.env.PORT || 8080;
 
 router.get('/', function(req, res){
 	res.json({message: 'Welcome to Photare'});
 });
 
-/**
- * Define api endpoint
- */
+
+// Define api endpoint
+
 app.use('/api', router);
 
 /**
- * Start listening
- */
+ * Start the server
+ * */
+
 app.listen(port);
 console.log("Listening...");
