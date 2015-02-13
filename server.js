@@ -36,6 +36,7 @@ router.get('/', function(req, res){
 	res.json({message: 'Welcome to Photare'});
 });
 
+// Routes that end in /photos
 router.route('/photos')
 	// Create a photo
 	.post(function(req, res){
@@ -52,12 +53,24 @@ router.route('/photos')
 		});
 		
 	})
+	// Get all photos 
 	.get(function(req, res){
 		Photo.find(function(err, photos){
 			if(err){
 				res.send(err);
 			}
 			res.json(photos);
+		});
+	});
+
+// Routes that end in /photos/:photo_id
+router.route('/photos/:photo_id')
+	.get(function(req, res){
+		Photo.findById(req.params.photo_id, function(err, photo){
+			if(err){
+				res.send(err);
+			}
+			res.json(photo);
 		});
 	});
 
