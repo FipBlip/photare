@@ -51,6 +51,14 @@ router.route('/photos')
 			res.json({message: "Photo created!"});
 		});
 		
+	})
+	.get(function(req, res){
+		Photo.find(function(err, photos){
+			if(err){
+				res.send(err);
+			}
+			res.json(photos);
+		});
 	});
 
 
@@ -63,4 +71,4 @@ app.use('/api', router);
  */
 
 app.listen(port);
-console.log("Listening...");
+console.log("Listening on port " + port);
