@@ -72,6 +72,23 @@ router.route('/photos/:photo_id')
 			}
 			res.json(photo);
 		});
+	})
+
+	// Update a photo
+	.put(function(req, res){
+		Photo.findById(req.params.photo_id, function(err, photo){
+			if(err){
+				res.send(err);
+			}
+
+			photo.title = "Photo title changed";
+			photo.save(function(err){
+				if(err){
+					res.send(err);
+				}
+				res.json({message: "Photo title changed"});
+			});
+		});
 	});
 
 
