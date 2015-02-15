@@ -81,16 +81,28 @@ router.route('/photos/:photo_id')
 				res.send(err);
 			}
 
-			photo.title = "Photo title changed";
+			photo.title = req.body.title;
 			photo.save(function(err){
 				if(err){
 					res.send(err);
 				}
-				res.json({message: "Photo title changed"});
+				res.json({message: "Photo title changed to " + req.body.title});
+
 			});
 		});
-	});
+	})
 
+	// Delete a photo
+	.delete(function(req, res){
+		Photo.remove({
+			_id: req.params.photo_id
+		}, function(err, photo){
+			if(err){
+				res.send(err);
+			}
+			res.json({message: "Photo deleted", params: req.params});
+		});
+	});
 
 // Define api endpoint
 app.use('/api', router);
