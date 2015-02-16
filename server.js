@@ -15,6 +15,9 @@ mongoose.connect('mongodb://localhost/photare'); // connect to our database
 mongoose.connection.on("open", function(){
 	console.log("Connected to Photare database");
 });
+mongoose.connection.on("error", function(){
+	console.log("Failed to connect to Photare database");
+});
 
 // Models
 var Photo = require('./app/models/photo.js');
