@@ -24,9 +24,11 @@ mongoose.connection.on("error", function(){
  * Routes
  */
 var apiRouter = require('./app/routes/api.js');
+var authRouter = require('./app/routes/auth.js');
 
 // Define api endpoint
 app.use('/api', apiRouter);
+app.use('/auth', authRouter);
 
 /**
  * Start the server
