@@ -6,6 +6,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var port = process.env.PORT || 8080;
 
+// Middleware
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
@@ -22,9 +23,10 @@ mongoose.connection.on("error", function(){
 /**
  * Routes
  */
-var router = require('./app/routes.js');
+var apiRouter = require('./app/routes/api.js');
+
 // Define api endpoint
-app.use('/api', router);
+app.use('/api', apiRouter);
 
 /**
  * Start the server
