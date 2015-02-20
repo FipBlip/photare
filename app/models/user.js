@@ -1,10 +1,11 @@
-var mongoose = requre('mongoose');
+var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var UserSchema = Schema({
 	local: {
-		email: 		String,
-		password: 	String
+		username: 		String,
+		email: 			String,
+		password: 		String
 	}
 });
 
