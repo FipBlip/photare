@@ -30,6 +30,3 @@ node_modules
 # Sublime files
 photare.sublime-project
 photare.sublime-workspace
-
-#build test files
-.travis.yml
