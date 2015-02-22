@@ -41,6 +41,9 @@ app.use('/auth', authRouter);
 app.get('/success', function(req, res){
 	res.json({message: "success after login"});
 });
+app.get('/failure', function(req, res){
+	res.json({message: "failure after login"});
+});
 
 /**
  * Start the server
