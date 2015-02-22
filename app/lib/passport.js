@@ -3,9 +3,12 @@ var User = require('../models/user.js');
 var LocalStrategy = require('passport-local').Strategy;
 
 
-passport.use('local', new LocalStrategy(
-	function(username, password, done) {
-		User.findOne({ "local.username": username }, function(err, user) {
+passport.use('local', new LocalStrategy({
+		usernameField: 'email',
+		passwordField: 'password'
+	},
+	function(email, password, done) {
+		User.findOne({ "local.email": email }, function(err, user) {
 			if (err) { return done(err); }
 			if (!user) {
 				return done(null, false, { message: 'Incorrect username.' });
