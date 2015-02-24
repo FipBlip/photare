@@ -26,15 +26,24 @@ authRouter.post('/login',
 
 authRouter.post('/register',
 	function(req, res){
-		var user = new User();
-		user.local.username = "theunexpected1";
-		user.local.email = "rahul.vagadiya@gmail.com";
-		user.local.password = "123.com";
-		user.save(function(err){
+		User.findOne({ "local.email": req.body.email }, function(err, result){
 			if(err){
 				res.send(err);
 			}
-			res.json({message: "user created!"});
+			if(!result){
+				var user = new User();
+				user.local.username = req.body.username;
+				user.local.email = req.body.email;
+				user.local.password = "123.com";
+				user.save(function(err){
+					if(err){
+						res.send(err);
+					}
+					res.json({message: "user created!"});
+				});
+			} else{
+				res.json({message: "User already exists with this email"});
+			}
 		});
 	}
 );
