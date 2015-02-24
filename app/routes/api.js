@@ -58,15 +58,15 @@ apiRouter.route('/photos/:photo_id')
 			if(err){
 				res.send(err);
 			}
-
-			photo.title = req.body.title;
-			photo.save(function(err){
-				if(err){
-					res.send(err);
-				}
-				res.json({message: "Photo title changed to " + req.body.title});
-
-			});
+			if(photo){
+				photo.title = req.body.title;
+				photo.save(function(err){
+					if(err){
+						res.send(err);
+					}
+					res.json({message: "Photo title changed to " + req.body.title});
+				});
+			}
 		});
 	})
 
