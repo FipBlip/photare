@@ -38,12 +38,13 @@ app.use('/api', apiRouter);
 app.use('/auth', authRouter);
 
 // ToDo: Refactor & Move into auth
-app.get('/success', function(req, res){
-	res.json({message: "success after login"});
+app.get('/successRegister', function(req, res){
+	res.json({message: "success after Register"});
 });
-app.get('/failure', function(req, res){
-	res.json({message: "failure after login"});
+app.get('/failureRegister', function(req, res){
+	res.json({message: "failure after Register"});
 });
+
 
 /**
  * Start the server
