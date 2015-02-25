@@ -44,6 +44,12 @@ app.get('/successRegister', function(req, res){
 app.get('/failureRegister', function(req, res){
 	res.json({message: "failure after Register"});
 });
+app.get('/successLogin', function(req, res){
+	res.json({message: "success after login"});
+});
+app.get('/failureLogin', function(req, res){
+	res.json({message: "failure after login"});
+});
 
 
 /**

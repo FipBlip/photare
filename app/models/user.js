@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var bCrypt = require('bcrypt-nodejs');
 
 var UserSchema = new Schema({
 	local: {
@@ -10,7 +11,7 @@ var UserSchema = new Schema({
 });
 
 UserSchema.methods.isPasswordValid = function (password) {
-	return this.local.password == password;
+	return bCrypt.compareSync(password, this.local.password);
 };
 
 

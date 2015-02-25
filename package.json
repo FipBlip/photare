@@ -2,6 +2,7 @@
   "name": "photare",
   "main": "server.js",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.4.2",
     "express": "~4.5.1",
     "express-session": "^1.10.3",
