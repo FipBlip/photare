@@ -27,7 +27,7 @@ passport.use('register', new LocalStrategy({
 	},
 	function(req, email, password, done) {
 		// find a user in Mongo with provided username
-		User.findOne({'local.email':email},function(err, user) {
+		User.findOne({'local.email': email},function(err, user) {
 			// In case of any error return
 			if (err){
 				console.log('Error in SignUp: '+err);
@@ -43,9 +43,9 @@ passport.use('register', new LocalStrategy({
 				// create the user
 				var newUser = new User();
 				// set the user's local credentials
-				newUser.username = req.param('username');
-				newUser.password = password;
-				newUser.email = email;
+				newUser.local.username = req.param('username');
+				newUser.local.password = password;
+				newUser.local.email = email;
 
 				// save the user
 				newUser.save(function(err) {
