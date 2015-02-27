@@ -8,10 +8,11 @@ var createHash = function(password){
 };
 
 passport.use('local', new LocalStrategy({
+		passReqToCallback : true,
 		usernameField: 'email',
 		passwordField: 'password'
 	},
-	function(email, password, done) {
+	function(req, email, password, done) {
 		User.findOne({ 'local.email': email }, function(err, user) {
 			if (err) { return done(err); }
 			if (!user) {
@@ -20,6 +21,14 @@ passport.use('local', new LocalStrategy({
 			if (!user.isPasswordValid(password)) {
 				return done(null, false, { message: 'Incorrect password.' });
 			}
+			// Session
+			req.login(user, function(err){
+				if (err) {
+					return next(err);
+				}
+				console.log('User logged in with email:' + req.user.local.email);
+			});
+
 			return done(null, user);
 		});
 	}

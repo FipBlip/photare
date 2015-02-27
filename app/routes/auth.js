@@ -28,6 +28,24 @@ authRouter.post('/register', passport.authenticate('register', {
 	successRedirect: '/successRegister',
 	failureRedirect: '/failureRegister'
 }));
+
+
+authRouter.get('/checkUserStatus', function(req, res){
+	res.send(req.user);
+});
+
+
+authRouter.get('/logout', function(req, res){
+	if(req.user){
+		req.logout();
+		res.send({message: "User logged out"});
+	} else{
+		res.send({message: "User not logged in!"});
+	}
+});
+
+
+
 /*
 authRouter.post('/register',
 	function(req, res){
