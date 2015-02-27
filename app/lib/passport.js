@@ -2,6 +2,10 @@ var passport = require('passport');
 var bCrypt = require('bcrypt-nodejs');
 var User = require('../models/user.js');
 var LocalStrategy = require('passport-local').Strategy;
+// Generates hash using bCrypt
+var createHash = function(password){
+	return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
+};
 
 passport.use('local', new LocalStrategy({
 		usernameField: 'email',
@@ -71,10 +75,5 @@ passport.deserializeUser(function(id, done) {
 		done(err, user);
 	});
 });
-
-// Generates hash using bCrypt
-var createHash = function(password){
-	return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
-};
 
 module.exports = passport;
