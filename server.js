@@ -6,12 +6,19 @@ var bodyParser = require('body-parser');
 var app = express();
 var port = process.env.PORT || 8080;
 
+// Mongoose
+var mongoose = require('mongoose');
+// Models
+var models = require('./app/models/index.js');
+// Routes
+var apiRouter = require('./app/routes/api.js')(app, express);
+var authRouter = require('./app/routes/auth.js')(app, express);
+
 // Middleware
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 // Mongo DB Connection
-var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/photare'); // connect to our database
 mongoose.connection.on("open", function(){
 	console.log("Connected to Photare database");
@@ -20,11 +27,6 @@ mongoose.connection.on("error", function(){
 	console.log("Failed to connect to Photare database");
 });
 
-/**
- * Routes
- */
-var apiRouter = require('./app/routes/api.js')(app, express);
-var authRouter = require('./app/routes/auth.js')(app, express);
 
 // Define api endpoint
 app.use('/api', apiRouter);
@@ -45,9 +47,7 @@ app.get('/failureLogin', function(req, res){
 });
 
 
-/**
- * Start the server
- */
+// Start the server
 
 app.listen(port);
 console.log("Listening on port " + port);
