@@ -2,9 +2,7 @@
  * Base setup
  */
 var express = require('express');
-var expressSession = require('express-session');
 var bodyParser = require('body-parser');
-var passport = require('passport');
 var app = express();
 var port = process.env.PORT || 8080;
 
@@ -12,13 +10,8 @@ var port = process.env.PORT || 8080;
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.use(expressSession({secret: 'photare kitty'}));
-app.use(passport.initialize());
-app.use(passport.session());
-
-
 // Mongo DB Connection
-var mongoose   = require('mongoose');
+var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/photare'); // connect to our database
 mongoose.connection.on("open", function(){
 	console.log("Connected to Photare database");
@@ -30,8 +23,8 @@ mongoose.connection.on("error", function(){
 /**
  * Routes
  */
-var apiRouter = require('./app/routes/api.js');
-var authRouter = require('./app/routes/auth.js');
+var apiRouter = require('./app/routes/api.js')(app, express);
+var authRouter = require('./app/routes/auth.js')(app, express);
 
 // Define api endpoint
 app.use('/api', apiRouter);
