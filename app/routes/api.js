@@ -82,18 +82,31 @@ module.exports = function(app, express){
 
 		// Delete a photo
 		.delete(function(req, res){
-			Photo.remove({
-				_id: req.params.photo_id
-			}, function(err, photo){
-				if(err){
-					res.send(err);
-				}
-				if(photo){
-					res.json({message: "Photo deleted", params: req.params});
-				} else{
-					res.json({message: "Photo does not exist"});
-				}
-			});
+			if(req.user){
+				Photo.findOne({
+					user: req.user,
+					_id: req.body.params.photo_id
+				}, function (err, photo){
+					if(err){
+						res.send(err);
+					}
+					if(photo){
+						console.log(photo);
+						photo.remove(function(err, deletedPhoto){
+							if(err){
+								res.send(err);
+							}
+							console.log(deletedPhoto);
+						});
+						res.json({message: "Photo deleted", params: req.params});
+					} else{
+						res.json({message: "Access denied"});
+					}
+				});
+			} else{
+				res.json({message: "Access denied"});
+			}
+
 		});
 
 	return apiRouter;
