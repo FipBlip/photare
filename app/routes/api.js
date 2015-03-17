@@ -1,6 +1,8 @@
 module.exports = function(app, express){
 	// Models
-	var Photo = require('../models/photo.js');
+	var mongoose = require('mongoose');
+	var Photo = mongoose.model('Photo');
+
 	// Router
 	var apiRouter = express.Router();
 
@@ -24,7 +26,11 @@ module.exports = function(app, express){
 			photo.image = "";
 			photo.url = req.body.url || "http://rahul.local:8080/api/photos/1";
 			photo.shortUrl = req.body.shortUrl || "http://rahul.local:8080/api/photos/1/short";
-
+			if(req.user){
+				photo.user = req.user;
+			} else{
+				photo.user = null;
+			}
 			photo.save(function(err){
 				if(err){
 					res.send(err);

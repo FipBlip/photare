@@ -2,7 +2,9 @@
 module.exports = function(app, express){
 
 	// Models
-	var User = require('../models/user.js');
+	var mongoose = require('mongoose');
+	var User = mongoose.model('User');
+
 	// Passport
 	var passport = require('../lib/passport.js')(app, User);
 	var expressSession = require('express-session');
@@ -20,7 +22,7 @@ module.exports = function(app, express){
 		next();
 	});
 
-	// First route
+	// Initial route
 	authRouter.get('/', function(req, res){
 		res.json({message: 'Please login or register to continue'});
 	});
@@ -39,10 +41,6 @@ module.exports = function(app, express){
 		})
 	);
 
-	authRouter.get('/checkUserStatus', function(req, res){
-		res.send(req.user);
-	});
-
 	authRouter.get('/logout', function(req, res){
 		if(req.user){
 			req.logout();
@@ -50,6 +48,10 @@ module.exports = function(app, express){
 		} else{
 			res.send({message: "User not logged in!"});
 		}
+	});
+
+	authRouter.get('/checkUserStatus', function(req, res){
+		res.send(req.user);
 	});
 
 	return authRouter;
