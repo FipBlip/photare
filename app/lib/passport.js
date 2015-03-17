@@ -1,5 +1,6 @@
 module.exports = function(app, User){
 
+	// Requires
 	var passport = require('passport');
 	var LocalStrategy = require('passport-local').Strategy;
 	
@@ -7,6 +8,7 @@ module.exports = function(app, User){
 	app.use(passport.initialize());
 	app.use(passport.session());
 
+	// Login middleware
 	passport.use('login', new LocalStrategy({
 			passReqToCallback : true,
 			usernameField: 'email',
@@ -34,6 +36,7 @@ module.exports = function(app, User){
 		}
 	));
 
+	// Register middleware
 	passport.use('register', new LocalStrategy({
 			passReqToCallback : true,
 			usernameField: 'email',
@@ -75,6 +78,7 @@ module.exports = function(app, User){
 		})
 	);
 
+	// User serialization & deserialization for reading
 	passport.serializeUser(function(user, done) {
 		done(null, user.id);
 	});
