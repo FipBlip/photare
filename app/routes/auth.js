@@ -1,20 +1,19 @@
-
-module.exports = function(app, express){
+module.exports = function(System){
 
 	// Models
 	var mongoose = require('mongoose');
 	var User = mongoose.model('User');
 
 	// Passport
-	var passport = require('../lib/passport.js')(app, User);
+	var passport = require('../lib/passport.js')(System.app, User);
 	var expressSession = require('express-session');
 	// Router
-	var authRouter = express.Router();
+	var authRouter = System.express.Router();
 
 	// Auth Middleware
-	app.use(expressSession({secret: 'photare kitty'}));
-	app.use(passport.initialize());
-	app.use(passport.session());
+	System.app.use(expressSession({secret: 'photare kitty'}));
+	System.app.use(passport.initialize());
+	System.app.use(passport.session());
 
 	// Middleware for routes
 	authRouter.use(function(req, res, next){
@@ -55,4 +54,4 @@ module.exports = function(app, express){
 	});
 
 	return authRouter;
-}
+};
