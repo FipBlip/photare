@@ -4,7 +4,10 @@ var User = mongoose.model('User');
 
 var PhotoSchema = Schema({
 	title: String,
-	image: String,
+	image: {
+		type: String,
+		required: true
+	},
 	url: String,
 	shortUrl: String,
 	user: {

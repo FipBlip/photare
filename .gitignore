@@ -27,6 +27,9 @@ node_modules
 # Users Environment Variables
 .lock-wscript
 
+# Uploads directory
+uploads
+
 # Sublime files
 photare.sublime-project
 photare.sublime-workspace

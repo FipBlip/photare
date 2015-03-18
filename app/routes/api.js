@@ -1,18 +1,17 @@
-module.exports = function(app, express){
-	// Models
+module.exports = function(System){
+	var Bitly = require('bitly');
 	var mongoose = require('mongoose');
-	var Photo = mongoose.model('Photo');
+	var Photo = mongoose.model('Photo'); // Photo model
 
-	// Router
-	var apiRouter = express.Router();
+	var apiRouter = System.express.Router();
 
 	// Middleware for routes
 	apiRouter.use(function(req, res, next){
-		console.log("New API request");
+		console.log('New API request : ' + req.url);
 		next();
 	});
 
-	// First route
+	// Test welcome route
 	apiRouter.get('/', function(req, res){
 		res.json({message: 'Welcome to Photare'});
 	});
@@ -22,21 +21,49 @@ module.exports = function(app, express){
 		// Create a photo
 		.post(function(req, res){
 			var photo = new Photo();
+			var image = req.files.image;
+
 			photo.title = req.body.title;
-			photo.image = "";
-			photo.url = req.body.url || "http://rahul.local:8080/api/photos/1";
-			photo.shortUrl = req.body.shortUrl || "http://rahul.local:8080/api/photos/1/short";
+			photo.url = req.body.url || 'http://rahul.local:8080/api/photos/1';
+			photo.user = photo.shortUrl = photo.image = null;
+
 			if(req.user){
 				photo.user = req.user;
-			} else{
-				photo.user = null;
 			}
-			photo.save(function(err){
-				if(err){
-					res.send(err);
+			
+			var getBitlyUrl = function(ok){
+				if(image){
+					photo.image = image.name;
+					var bitly = new Bitly(System.config.bitly.username, System.config.bitly.APIKey);
+					bitly.shorten('http://photare.com/test/' + image.name, function(err, response) {
+						if (err) {
+							ok(err);
+						} else{
+							photo.shortUrl = response.data.url;
+							ok();
+						}
+					});
+				} else{
+					ok();
 				}
-				res.json({message: "Photo created!"});
-			});
+			};
+
+			getBitlyUrl
+				.after(function(ok){
+					photo.save(function(err){
+						if(err){
+							res.send(err);
+						} else{
+							res.json({message: 'Photo created!'});							
+						}
+					});
+				})
+				.catch(function(err){
+					if(err){
+						res.send(err);
+					}
+				});
+
 			
 		})
 		// Get all photos 
@@ -68,14 +95,15 @@ module.exports = function(app, express){
 				}
 				if(photo){
 					photo.title = req.body.title;
+
 					photo.save(function(err){
 						if(err){
 							res.send(err);
 						}
-						res.json({message: "Photo title changed to " + req.body.title});
+						res.json({message: 'Photo title changed to ' + req.body.title});
 					});
 				} else{
-					res.json({message: "Photo does not exist"});
+					res.json({message: 'Photo does not exist'});
 				}
 			});
 		})
@@ -91,20 +119,19 @@ module.exports = function(app, express){
 						res.send(err);
 					}
 					if(photo){
-						console.log(photo);
 						photo.remove(function(err, deletedPhoto){
 							if(err){
 								res.send(err);
 							}
-							console.log(deletedPhoto);
 						});
-						res.json({message: "Photo deleted", params: req.params});
+						// ToDo: proper callback needs to be tested
+						res.json({message: 'Photo deleted', params: req.params});
 					} else{
-						res.json({message: "Access denied"});
+						res.json({message: 'Access denied'});
 					}
 				});
 			} else{
-				res.json({message: "Access denied"});
+				res.json({message: 'Access denied'});
 			}
 
 		});
