@@ -3,20 +3,28 @@
  */
 var express = require('express');
 var bodyParser = require('body-parser');
+var multer = require('multer'); 
+var oknow = require('oknow');
+var mongoose = require('mongoose');
+var config = require('./config/index.js');
+var models = require('./app/models/index.js');
+
 var app = express();
 var port = process.env.PORT || 8080;
-
-// Mongoose
-var mongoose = require('mongoose');
-// Models
-var models = require('./app/models/index.js');
-// Routes
-var apiRouter = require('./app/routes/api.js')(app, express);
-var authRouter = require('./app/routes/auth.js')(app, express);
+var System = {
+	app: app,
+	express: express,
+	config: config,
+	oknow: oknow
+};
 
 // Middleware
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(multer({ dest: config.uploadsDir}));
+
+var apiRouter = require('./app/routes/api.js')(System);
+var authRouter = require('./app/routes/auth.js')(System);
 
 // Mongo DB Connection
 mongoose.connect('mongodb://localhost/photare'); // connect to our database
@@ -48,6 +56,5 @@ app.get('/failureLogin', function(req, res){
 
 
 // Start the server
-
 app.listen(port);
 console.log("Listening on port " + port);
