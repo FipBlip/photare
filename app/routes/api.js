@@ -14,6 +14,7 @@ module.exports = function(System){
 	// Test welcome route
 	apiRouter.get('/', function(req, res){
 		res.json({message: 'Welcome to Photare'});
+		console.log(req.headers);
 	});
 
 	// Routes that end in /photos

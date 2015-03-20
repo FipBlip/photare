@@ -1,12 +1,12 @@
-module.exports = function(app, User){
+module.exports = function(System, User){
 
 	// Requires
 	var passport = require('passport');
 	var LocalStrategy = require('passport-local').Strategy;
 	
 	// Auth Middleware
-	app.use(passport.initialize());
-	app.use(passport.session());
+	System.app.use(passport.initialize());
+	System.app.use(passport.session());
 
 	// Login middleware
 	passport.use('login', new LocalStrategy({
@@ -15,7 +15,9 @@ module.exports = function(app, User){
 			passwordField: 'password'
 		},
 		function(req, email, password, done) {
-			User.findOne({ 'local.email': email }, function(err, user) {
+			User.findOne({ 
+				'local.email': email
+			}, function(err, user) {
 				if (err) { return done(err); }
 				if (!user) {
 					return done(null, false, { message: 'Incorrect username.' });
@@ -23,6 +25,16 @@ module.exports = function(app, User){
 				if (!user.isPasswordValid(password)) {
 					return done(null, false, { message: 'Incorrect password.' });
 				}
+				switch (user.local.status){
+					case System.config.user.status.pending:
+						return done(null, false, { message: 'User activation pending.' });
+					case System.config.user.status.deleted:
+						return done(null, false, { message: 'User does not exist anymore.' });
+					default: 
+						console.log("Login attempt - user is active");
+						break;
+				}
+
 				// Session
 				req.login(user, function(err){
 					if (err) {
@@ -58,11 +70,14 @@ module.exports = function(app, User){
 				} else {
 					// if there is no user with that email
 					// create the user
+					console.log('System.config');
+					console.log(System.config);
 					var newUser = new User();
 					// set the user's local credentials
 					newUser.local.username = req.param('username');
 					newUser.local.password = password;
 					newUser.local.email = email;
+					newUser.local.status = System.config.user.status.pending;
 
 					// save the user
 					newUser.save(function(err) {

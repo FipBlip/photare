@@ -5,7 +5,7 @@ module.exports = function(System){
 	var User = mongoose.model('User');
 
 	// Passport
-	var passport = require('../lib/passport.js')(System.app, User);
+	var passport = require('../lib/passport.js')(System, User);
 	var expressSession = require('express-session');
 	// Router
 	var authRouter = System.express.Router();

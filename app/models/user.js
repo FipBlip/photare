@@ -4,9 +4,12 @@ var bCrypt = require('bcrypt-nodejs');
 
 var UserSchema = new Schema({
 	local: {
-		username: 		String,
-		email: 			String,
-		password: 		String
+		username: 				String,
+		email: 					String,
+		password: 				String,
+		status: 				String, // pending / active / deleted / 
+		resetPasswordToken:		String,
+		resetPasswordExpires: 	Date
 	}
 });
 
