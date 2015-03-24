@@ -1,0 +1,23 @@
+{
+  "name": "photare",
+  "version": "1.0.0",
+  "homepage": "https://github.com/FipBlip/photare",
+  "authors": [
+    "Rahul Vagadiya <rahul.vagadiya@gmail.com>"
+  ],
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "~0.13.1",
+    "material-ui": "~0.7.1"
+  }
+}
