@@ -29,7 +29,8 @@ module.exports = function(System){
 	authRouter.post('/login',
 		passport.authenticate('login', {
 			successRedirect: '/successLogin',
-			failureRedirect: '/failureLogin'
+			failureRedirect: '/failureLogin',
+			failureFlash: true
 		})
 	);
 

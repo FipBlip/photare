@@ -5,6 +5,7 @@
     "bcrypt-nodejs": "0.0.3",
     "bitly": "^1.2.5",
     "body-parser": "~1.4.2",
+    "connect-flash": "^0.1.1",
     "express": "~4.5.1",
     "express-session": "^1.10.3",
     "mongoose": "~3.8.0",

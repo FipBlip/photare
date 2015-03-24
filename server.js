@@ -8,6 +8,7 @@ var oknow = require('oknow');
 var mongoose = require('mongoose');
 var config = require('./config/index.js');
 var models = require('./app/models/index.js');
+var flash = require('connect-flash');
 
 var app = express();
 var port = process.env.PORT || 8080;
@@ -22,6 +23,7 @@ var System = {
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(multer({ dest: config.uploadsDir}));
+app.use(flash());
 
 var apiRouter = require('./app/routes/api.js')(System);
 var authRouter = require('./app/routes/auth.js')(System);
@@ -51,6 +53,7 @@ app.get('/successLogin', function(req, res){
 	res.json({message: "success after login"});
 });
 app.get('/failureLogin', function(req, res){
+    console.log(req.flash('error'));
 	res.json({message: "failure after login"});
 });
 

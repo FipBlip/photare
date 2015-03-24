@@ -114,7 +114,7 @@ module.exports = function(System){
 			if(req.user){
 				Photo.findOne({
 					user: req.user,
-					_id: req.body.params.photo_id
+					_id: req.params.photo_id
 				}, function (err, photo){
 					if(err){
 						res.send(err);

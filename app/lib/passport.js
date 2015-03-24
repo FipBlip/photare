@@ -27,7 +27,7 @@ module.exports = function(System, User){
 				}
 				switch (user.local.status){
 					case System.config.user.status.pending:
-						return done(null, false, { message: 'User activation pending.' });
+						return done(null, false, { message: 'User activation pending.'});
 					case System.config.user.status.deleted:
 						return done(null, false, { message: 'User does not exist anymore.' });
 					default: 
@@ -77,7 +77,7 @@ module.exports = function(System, User){
 					newUser.local.username = req.param('username');
 					newUser.local.password = password;
 					newUser.local.email = email;
-					newUser.local.status = System.config.user.status.pending;
+					newUser.local.status = System.config.user.status.active;
 
 					// save the user
 					newUser.save(function(err) {
