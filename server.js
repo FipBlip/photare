@@ -58,7 +58,7 @@ app.get('/failureLogin', function(req, res){
 });
 
 // Routes - Client - Set /public as our static content dir
-app.use('/', express.static(__dirname + '/public/'));
+app.use('/', express.static(__dirname + '/app/public/'));
 app.get('*', function(req, res){
 	res.setHeader('Content-Type', 'text/html');
 	res.sendfile('./app/public/views/index.html');
