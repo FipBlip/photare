@@ -27,9 +27,12 @@ node_modules
 # Users Environment Variables
 .lock-wscript
 
-# Uploads directory
-uploads
-
 # Sublime files
 photare.sublime-project
 photare.sublime-workspace
+
+# Uploads directory
+uploads
+
+# Built files
+app/public/js/bundle.js
