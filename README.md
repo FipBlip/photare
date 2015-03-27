@@ -5,3 +5,10 @@ Simple photo sharing service
 
 Features
 - User based photo sharing
+
+### Installation
+
+Run the below in command line
+
+    npm install
+    grunt
