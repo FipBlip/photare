@@ -1,7 +1,7 @@
 # photare [![Build Status](https://travis-ci.org/FipBlip/photare.svg?branch=master)](https://travis-ci.org/FipBlip/photare)
 Simple photo sharing service
 
-- App being built on MEAN stack
+- [Photare](http://photare.com) app being re-built on MEAN stack + a retake on UI.
 
 Features
 - User based photo sharing
