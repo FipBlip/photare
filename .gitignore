@@ -34,5 +34,6 @@ photare.sublime-workspace
 # Uploads directory
 uploads
 
-# Built files
+# Project files
 app/public/js/bundle.js
+Photare.psd
