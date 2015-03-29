@@ -1,5 +1,5 @@
-var React = require('react');
-var MyRaisedButton = require('./MyRaisedButton');
+var React = require('react'),
+	MyRaisedButton = require('./MyRaisedButton');
 
  (function() {
 

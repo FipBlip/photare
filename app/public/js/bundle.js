@@ -15,8 +15,8 @@ var MyRaisedButton = React.createClass({displayName: "MyRaisedButton",
 module.exports = MyRaisedButton;
 
 },{"material-ui":"/Applications/MAMP/htdocs/photare/node_modules/material-ui/lib/index.js","react":"/Applications/MAMP/htdocs/photare/node_modules/react/react.js"}],"/Applications/MAMP/htdocs/photare/app/public/js/index.js":[function(require,module,exports){
-var React = require('react');
-var MyRaisedButton = require('./MyRaisedButton');
+var React = require('react'),
+	MyRaisedButton = require('./MyRaisedButton');
 
  (function() {
 
