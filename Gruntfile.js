@@ -25,7 +25,7 @@ module.exports = function(grunt){
 					watch: true, // use watchify for incremental builds!
 					keepAlive: true,
 					debug: true,
-					transform: ['reactify']
+					transform: ['babelify']
 				},
 				src: ['app/public/js/index.js'],
 				dest: 'app/public/js/bundle.js'
@@ -33,7 +33,7 @@ module.exports = function(grunt){
 			dist: {
 				options: {
 					debug: false,
-					transform: ['reactify']
+					transform: ['babelify']
 				},
 				src: ['<%= browserify.dev.src%>'],
 				dest: '<%= browserify.dev.dest%>'

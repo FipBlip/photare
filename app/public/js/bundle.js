@@ -1,30 +1,30 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/Applications/MAMP/htdocs/photare/app/public/js/MyRaisedButton.js":[function(require,module,exports){
-var React = require('react'),
-	mui = require('material-ui'),
-	RaisedButton = mui.RaisedButton;
+"use strict";
 
-var MyRaisedButton = React.createClass({displayName: "MyRaisedButton",
-	render: function() {
+var React = require("react"),
+    mui = require("material-ui"),
+    RaisedButton = mui.RaisedButton;
+
+var MyRaisedButton = React.createClass({
+	displayName: "MyRaisedButton",
+
+	render: function render() {
 		console.log("MyRaisedButton Initialized Yo");
-		return (
-			React.createElement(RaisedButton, {label: this.props.label})
-		);
+		return React.createElement(RaisedButton, { label: this.props.label });
 	}
 });
 
 module.exports = MyRaisedButton;
 
 },{"material-ui":"/Applications/MAMP/htdocs/photare/node_modules/material-ui/lib/index.js","react":"/Applications/MAMP/htdocs/photare/node_modules/react/react.js"}],"/Applications/MAMP/htdocs/photare/app/public/js/index.js":[function(require,module,exports){
-var React = require('react'),
-	MyRaisedButton = require('./MyRaisedButton');
+"use strict";
 
- (function() {
+var React = require("react"),
+    MyRaisedButton = require("./MyRaisedButton");
 
-	React.render(
-		React.createElement(MyRaisedButton, {label: "Photare"}),
-		document.getElementById('example')
-	);
-	
+(function () {
+
+	React.render(React.createElement(MyRaisedButton, { label: "Photare" }), document.getElementById("example"));
 })();
 
 },{"./MyRaisedButton":"/Applications/MAMP/htdocs/photare/app/public/js/MyRaisedButton.js","react":"/Applications/MAMP/htdocs/photare/node_modules/react/react.js"}],"/Applications/MAMP/htdocs/photare/node_modules/browserify/node_modules/process/browser.js":[function(require,module,exports){
